@@ -179,10 +179,28 @@
     b.addEventListener('click', function () { abrirVista(b.dataset.vista); });
   });
 
+  /* Atalhos internos. Com data-ancora, rola até o elemento indicado. */
+  function seguirAtalho(el) {
+    abrirVista(el.dataset.ir);
+
+    var ancora = el.dataset.ancora;
+    if (!ancora) { return; }
+
+    var alvo = document.getElementById(ancora);
+    if (!alvo) { return; }
+
+    setTimeout(function () {
+      var topo = alvo.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({ top: topo, behavior: 'smooth' });
+      alvo.classList.add('realce');
+      setTimeout(function () { alvo.classList.remove('realce'); }, 1600);
+    }, 60);
+  }
+
   $$('[data-ir]').forEach(function (el) {
-    el.addEventListener('click', function () { abrirVista(el.dataset.ir); });
+    el.addEventListener('click', function () { seguirAtalho(el); });
     el.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrirVista(el.dataset.ir); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); seguirAtalho(el); }
     });
   });
 

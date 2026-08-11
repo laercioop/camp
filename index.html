@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0E1C47">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="assets/img/logo-asj-mark.png">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -21,7 +21,8 @@
     <a class="marca" href="#inicio" aria-label="Início">
       <img src="assets/img/logo-asj-mark.png" alt="Brasão da Associação São José">
     </a>
-    <span class="dir"><span class="ano">2026</span></span>
+    <span class="dir"><span class="ano">ASJ 2026</span></span>
+    <!-- A altura da barra é fixa (--topo). Aumente os elementos, não a barra. -->
   </div>
 </header>
 
@@ -77,12 +78,16 @@
               <li>Sítio com a placa <strong>“Rancho Paumar”</strong></li>
               <li>Coordenadas: <strong>23°02'52.3"S 46°52'38.5"W</strong></li>
             </ul>
-            <p style="margin-top:14px">
-              <a class="botao botao-azul" href="https://www.google.com/maps/search/?api=1&query=-23.047861,-46.877361" target="_blank" rel="noopener">
+            <div class="acoes-cartao">
+              <button class="botao botao-azul" type="button" data-ir="mais" data-ancora="mapa">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3Z"/><path d="M9 3v15M15 6v15"/></svg>
-                Abrir no Google Maps
+                Ver mapa
+              </button>
+              <a class="botao botao-contorno" href="https://www.google.com/maps/search/?api=1&query=-23.047861,-46.877361" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                Google Maps
               </a>
-            </p>
+            </div>
           </div>
         </div>
       </div>
@@ -253,7 +258,7 @@
   </div>
 
   <!-- Local -->
-  <div class="cartao destaque">
+  <div class="cartao destaque" id="mapa">
     <p class="sobrelinha azul">Onde é</p>
     <h3>Rancho Paumar — Itatiba, SP</h3>
     <ul class="dados">
