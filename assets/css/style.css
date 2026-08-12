@@ -7,6 +7,11 @@
 :root {
   --azul:        #213C8C;
   --azul-vivo:   #2E4FAF;
+
+  /* Azuis luminosos, usados nos botões de vidro */
+  --azul-luz:    #5B8CF7;
+  --azul-meio:   #2F5BD9;
+  --azul-fundo:  #1E3F9E;
   --azul-escuro: #172B66;
   --azul-noite:  #0E1C47;
   --azul-nevoa:  #EDF1FA;
@@ -323,60 +328,113 @@ h1, h2, h3, h4 {
   cursor: pointer;
   transition: transform .18s ease, filter .18s ease, background .18s ease, color .18s ease;
 }
-/* Todo botão recebe um brilho superior, como reflexo em vidro. */
+/* Todo botão é uma pastilha de vidro: brilho no topo, reflexo que
+   atravessa a superfície ao passar o mouse. */
 .botao {
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(10px) saturate(160%);
-  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  isolation: isolate;
+  font-weight: 600;
+  letter-spacing: .015em;
+  backdrop-filter: blur(10px) saturate(170%);
+  -webkit-backdrop-filter: blur(10px) saturate(170%);
+  transition:
+    transform .2s cubic-bezier(.2, .8, .3, 1),
+    box-shadow .2s ease,
+    filter .2s ease,
+    background .2s ease,
+    color .2s ease;
 }
+/* Brilho fixo na metade de cima. */
 .botao::before {
   content: "";
   position: absolute;
   left: 0; right: 0; top: 0;
-  height: 50%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, .3), rgba(255, 255, 255, 0));
+  height: 52%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .38), rgba(255, 255, 255, 0));
   pointer-events: none;
+  z-index: 1;
 }
-.botao > * { position: relative; }
-.botao svg { width: 15px; height: 15px; position: relative; }
-.botao:hover { transform: translateY(-1px); }
+/* Reflexo que corre da esquerda para a direita. */
+.botao::after {
+  content: "";
+  position: absolute;
+  top: -60%; bottom: -60%;
+  left: -70%;
+  width: 45%;
+  transform: skewX(-22deg);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .38), rgba(255, 255, 255, 0));
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+}
+.botao:hover::after { opacity: 1; animation: reflexo .7s ease; }
+@keyframes reflexo {
+  from { left: -70%; }
+  to   { left: 125%; }
+}
+.botao > *, .botao svg { position: relative; z-index: 2; }
+.botao svg { width: 15px; height: 15px; }
+.botao:hover { transform: translateY(-2px); }
+.botao:active { transform: translateY(0); }
 
 .botao-azul {
-  background: linear-gradient(160deg, rgba(46, 79, 175, .88), rgba(23, 43, 102, .9));
-  border-color: rgba(255, 255, 255, .22);
+  background:
+    linear-gradient(168deg, rgba(91, 140, 247, .95) 0%, rgba(47, 91, 217, .95) 52%, rgba(30, 63, 158, .96) 100%);
+  border-color: rgba(255, 255, 255, .36);
   color: #fff;
   box-shadow:
-    0 6px 20px rgba(14, 28, 71, .3),
-    inset 0 1px 0 rgba(255, 255, 255, .26);
+    0 8px 22px rgba(47, 91, 217, .42),
+    inset 0 1px 0 rgba(255, 255, 255, .5),
+    inset 0 -1px 0 rgba(10, 25, 70, .3);
 }
 .botao-azul:hover {
-  background: linear-gradient(160deg, rgba(60, 96, 200, .92), rgba(33, 60, 140, .94));
+  background:
+    linear-gradient(168deg, rgba(116, 160, 255, .97) 0%, rgba(60, 106, 234, .97) 52%, rgba(37, 74, 180, .98) 100%);
   color: #fff;
+  box-shadow:
+    0 12px 30px rgba(47, 91, 217, .5),
+    inset 0 1px 0 rgba(255, 255, 255, .6),
+    inset 0 -1px 0 rgba(10, 25, 70, .3);
 }
 
 .botao-ouro {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, .34), rgba(255, 255, 255, 0) 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, .4), rgba(255, 255, 255, 0) 56%),
     var(--grad-ouro);
-  border-color: rgba(255, 255, 255, .38);
+  border-color: rgba(255, 255, 255, .45);
   color: var(--azul-noite);
   box-shadow:
-    0 8px 24px rgba(201, 162, 39, .38),
-    inset 0 1px 0 rgba(255, 255, 255, .55);
+    0 8px 24px rgba(201, 162, 39, .42),
+    inset 0 1px 0 rgba(255, 255, 255, .65),
+    inset 0 -1px 0 rgba(120, 92, 12, .3);
 }
-.botao-ouro:hover { filter: brightness(1.07); color: var(--azul-noite); }
+.botao-ouro:hover {
+  filter: brightness(1.08);
+  color: var(--azul-noite);
+  box-shadow:
+    0 12px 32px rgba(201, 162, 39, .5),
+    inset 0 1px 0 rgba(255, 255, 255, .75),
+    inset 0 -1px 0 rgba(120, 92, 12, .3);
+}
 
 .botao-contorno {
-  background: rgba(255, 255, 255, .45);
-  border-color: rgba(33, 60, 140, .45);
-  color: var(--azul);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .8), rgba(240, 245, 255, .5));
+  border-color: rgba(47, 91, 217, .5);
+  color: var(--azul-meio);
+  box-shadow:
+    0 4px 14px rgba(47, 91, 217, .12),
+    inset 0 1px 0 rgba(255, 255, 255, .9);
 }
 .botao-contorno:hover {
-  background: linear-gradient(160deg, rgba(46, 79, 175, .9), rgba(23, 43, 102, .92));
-  border-color: rgba(255, 255, 255, .22);
+  background:
+    linear-gradient(168deg, rgba(91, 140, 247, .95), rgba(47, 91, 217, .95) 55%, rgba(30, 63, 158, .96));
+  border-color: rgba(255, 255, 255, .36);
   color: #fff;
+  box-shadow:
+    0 12px 28px rgba(47, 91, 217, .42),
+    inset 0 1px 0 rgba(255, 255, 255, .5);
 }
 .botao-largo { width: 100%; }
 
