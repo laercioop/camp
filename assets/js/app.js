@@ -267,7 +267,7 @@
     var caixas = $$('#lista-itens input');
     var feitos = caixas.filter(function (c) { return c.checked; }).length;
     $('#progresso-texto').textContent = feitos + ' de ' + caixas.length;
-    $('#progresso-barra').style.width = (caixas.length ? (feitos / caixas.length) * 100 : 0) + '%';
+    $('#progresso-barra').style.transform = 'scaleX(' + (caixas.length ? feitos / caixas.length : 0) + ')';
   }
 
   function montarLista() {
@@ -347,11 +347,21 @@
 
   /* ---------- Vidro da barra superior ---------- */
   /* A barra fica mais translúcida depois que a página rola. */
+  /* Lê a rolagem uma vez por quadro e só mexe na classe quando o estado muda. */
   var barraTopo = $('.barra-topo');
+  var rolou = null;
+  var agendado = false;
   function ajustarVidro() {
-    if (barraTopo) { barraTopo.classList.toggle('rolou', window.scrollY > 12); }
+    agendado = false;
+    var agora = window.scrollY > 12;
+    if (barraTopo && agora !== rolou) {
+      rolou = agora;
+      barraTopo.classList.toggle('rolou', agora);
+    }
   }
-  window.addEventListener('scroll', ajustarVidro, { passive: true });
+  window.addEventListener('scroll', function () {
+    if (!agendado) { agendado = true; requestAnimationFrame(ajustarVidro); }
+  }, { passive: true });
   ajustarVidro();
 
   /* ---------- Início ---------- */

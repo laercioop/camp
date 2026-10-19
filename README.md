@@ -45,8 +45,17 @@ Os demais textos ficam direto no `index.html`.
 
 A paleta segue o site da Associação São José: azul `#213C8C`, dourado e fundo creme.
 As fontes são Cormorant Garamond (títulos) e Inter (texto).
-As barras e os botões usam vidro fosco (*glassmorphism*): fundo translúcido com
-`backdrop-filter` e um brilho no topo.
+As barras superior e inferior usam vidro fosco (*glassmorphism*): fundo translúcido
+com `backdrop-filter` e um brilho no topo.
+Os botões e os cartões imitam vidro só com gradiente e brilho.
+Não use `backdrop-filter` neles: o filtro deixa a rolagem lenta no celular.
+
+## Imagens
+
+- Use WebP para fotos e logos. Mantenha um JPEG ou PNG como reserva dentro de `<picture>`.
+- Redimensione cada imagem para o tamanho de exibição. Use no máximo 2× a largura exibida.
+- Informe `width` e `height` em cada `<img>`.
+- Use `loading="lazy"` nas imagens que não aparecem no topo da página.
 
 ## Pendências
 

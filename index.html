@@ -8,8 +8,9 @@
   <meta name="theme-color" content="#0E1C47">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="assets/img/logo-asj-mark.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="preload" as="image" href="assets/img/hero-768.webp" imagesrcset="assets/img/hero-768.webp 768w, assets/img/hero.webp 1536w" imagesizes="(max-width: 780px) 100vw, 780px" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -19,7 +20,10 @@
   <div class="interno">
     <span class="esq">Acampamento</span>
     <a class="marca" href="#inicio" aria-label="Início">
-      <img src="assets/img/logo-asj-mark.png" alt="Brasão da Associação São José">
+      <picture>
+        <source srcset="assets/img/logo-asj-mark.webp" type="image/webp">
+        <img src="assets/img/logo-asj-mark.png" alt="Brasão da Associação São José" width="48" height="52" decoding="async">
+      </picture>
     </a>
     <span class="dir"><span class="ano">ASJ 2026</span></span>
     <!-- A altura da barra é fixa (--topo). Aumente os elementos, não a barra. -->
@@ -30,7 +34,10 @@
 <main id="vista-inicio" class="vista envelope" data-vista="inicio">
 
   <div class="hero">
-    <img src="assets/img/hero.png" alt="Acampamento ASJ — Associação São José" fetchpriority="high">
+    <picture>
+      <source type="image/webp" srcset="assets/img/hero-768.webp 768w, assets/img/hero.webp 1536w" sizes="(max-width: 780px) 100vw, 780px">
+      <img src="assets/img/hero.jpg" alt="Acampamento ASJ — Associação São José" width="1536" height="1024" fetchpriority="high" decoding="async">
+    </picture>
   </div>
 
   <div class="faixa-larga">
@@ -267,7 +274,7 @@
       <li>Coordenadas: <strong>23°02'52.3"S 46°52'38.5"W</strong></li>
     </ul>
     <div class="foto-local">
-      <img src="assets/img/local.jpeg" alt="Vista aérea do sítio Rancho Paumar">
+      <img src="assets/img/local.jpeg" alt="Vista aérea do sítio Rancho Paumar" width="302" height="240" loading="lazy" decoding="async">
     </div>
     <p style="margin-top:14px">
       <a class="botao botao-azul botao-largo" href="https://www.google.com/maps/search/?api=1&query=-23.047861,-46.877361" target="_blank" rel="noopener">
@@ -401,6 +408,6 @@
 
 <div class="torrada" id="torrada" role="status" aria-live="polite"></div>
 
-<script src="assets/js/app.js"></script>
+<script src="assets/js/app.js" defer></script>
 </body>
 </html>
